@@ -5,16 +5,18 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: ticketsapp-308309
   artifacts:
-    - image: nikitalipin97/auth
+    - image: us.gcr.io/ticketsapp-308309/auth
       context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: './src/**/**/*.ts'
+          - src: './src/**/*.ts'
             dest: .
 
 
