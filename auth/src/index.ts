@@ -1,4 +1,5 @@
 import express from 'express'
+import 'express-async-errors'
 
 // == Middlewares ============
 import { errorHandler } from './middlewares/error-handler'
@@ -19,7 +20,7 @@ app.use(signinRouter)
 app.use(signupRouter)
 app.use(signoutRouter)
 
-app.all('*', () => {
+app.all('*', async () => {
     throw new NotFoundError()
 })
 
