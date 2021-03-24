@@ -38,7 +38,7 @@ router.post(
         const token = jwt.sign({
             id: user.id,
             email: user.email
-        }, 'secret')
+        }, process.env.JWT!)
 
         // Store it on session object
         req.session = {
