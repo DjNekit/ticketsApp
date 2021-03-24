@@ -4,9 +4,7 @@ const router = Router()
 
 router.post('/api/users/signout', (req, res) => {
     req.session = null
-    res.json({
-        message: 'signout success'
-    })
+    res.json({})
 })
 
 export { router as signoutRouter }
