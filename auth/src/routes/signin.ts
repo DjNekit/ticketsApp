@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { body } from 'express-validator'
+import jwt from 'jsonwebtoken'
 
 import { validateRequest } from '../middlewares/validate-request'
 
@@ -33,10 +34,21 @@ router.post(
         const passwordsMatch = await PasswordManager.compare(existingUser.password, password)
 
         if (!passwordsMatch) {
-            throw new BadRequestError('Password is not correct')
+            throw new BadRequestError('Invalide credentials')
         }
+
+        const token = jwt.sign({
+            id: existingUser.id,
+            email: existingUser.email
+        }, process.env.JWT!)
         
-        res.send('success')
+        req.session = {
+            jwt: token
+        }
+
+        res.json({
+            message: existingUser
+        })
     }
 )
 
