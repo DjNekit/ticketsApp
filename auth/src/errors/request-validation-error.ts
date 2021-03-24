@@ -15,8 +15,7 @@ export class RequestValidationError extends CustomError {
             field: error.param
         }))
 
-        return {
-            errors: formattedErrors
-        }
+        return formattedErrors
+        
     }
 }

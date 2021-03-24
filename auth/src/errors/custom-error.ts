@@ -6,5 +6,5 @@ export abstract class CustomError extends Error {
         Object.setPrototypeOf(this, CustomError.prototype)
     }
 
-    abstract serializeErrors(): { errors: Array<{ message: string, field?: string }> }
+    abstract serializeErrors(): Array<{ message: string, field?: string }>
 }

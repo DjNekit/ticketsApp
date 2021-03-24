@@ -17,6 +17,16 @@ spec:
         # image: us.gcr.io/ticketapp-308317/auth
         image: nikitalipin97/auth
         imagePullPolicy: IfNotPresent
+        env:
+          - name: JWT
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret
+                key: JWT
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "300m"
 
 ---
 

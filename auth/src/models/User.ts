@@ -1,5 +1,5 @@
 import { Schema, model, Model, Document } from 'mongoose'
-import { Password } from '../services/password'
+import { PasswordManager } from '../services/passwordManager'
 
 interface UserAttrs {
     email: string
@@ -25,11 +25,21 @@ const userSchema = new Schema({
         type: String,
         required: true
     }
+}, {
+    toJSON: {
+       transform: (doc, ret) => {
+           const id = ret._id
+           ret.id = ret._id
+           delete ret._id
+           delete ret.password
+       },
+       versionKey: false
+    } 
 })
 
 userSchema.pre('save', async function(done) {
     if (this.isModified('password')) {
-        const hashed = await Password.toHash(this.get('password'))
+        const hashed = await PasswordManager.toHash(this.get('password'))
         this.set('password', hashed)
     } 
 
