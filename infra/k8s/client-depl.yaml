@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: nikitalipin97/client:latest
+        image: nikitalipin97/client
         imagePullPolicy: IfNotPresent
 
 ---

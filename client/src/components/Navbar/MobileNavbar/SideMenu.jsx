@@ -16,7 +16,7 @@ export const SideMenu = ({ open, close }) => {
 						width="40"
 						height="40"
 						fill="currentColor"
-						class="bi bi-x"
+						className="bi bi-x"
 						viewBox="0 0 16 16"
 						onClick={close}
 					>

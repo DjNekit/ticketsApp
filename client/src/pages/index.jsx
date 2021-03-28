@@ -1,7 +1,7 @@
 const RootPage = () => {
     return (
         <div>
-            Landing Page!!!
+            <h1>Landing Page</h1>
         </div>
     )
 }

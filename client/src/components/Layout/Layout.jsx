@@ -1,12 +1,13 @@
-import { Navbar } from "../Navbar"
+import { Navbar } from '../Navbar'
+import { Footer } from '../Footer'
+import { Wrapper } from './style'
 
 export const Layout = ({ children }) => {
 	return (
-        <div>
+        <Wrapper>
             <Navbar />
-            <div class='container mt-3'>
-                {children}  
-            </div> 
-        </div>
+            {children}
+            <Footer />  
+        </Wrapper>
 	)
 }
