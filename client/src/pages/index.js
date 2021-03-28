@@ -1,3 +1,9 @@
-export default () => {
-    return <h1>Root Page</h1>
+const RootPage = () => {
+    return (
+        <div>
+            Landing Page!!!
+        </div>
+    )
 }
+
+export default RootPage

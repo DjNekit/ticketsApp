@@ -15,7 +15,7 @@ spec:
       containers:
       - name: auth
         # image: us.gcr.io/ticketapp-308317/auth
-        image: nikitalipin97/auth
+        image: nikitalipin97/auth:latest
         imagePullPolicy: IfNotPresent
         env:
           - name: JWT
