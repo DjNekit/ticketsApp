@@ -1,11 +1,10 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ListGroup, Nav } from 'react-bootstrap-v5';
 import { SideMenuWrapper, Menu } from '../style';
 
 export const SideMenu = ({ open, close }) => {
-
-    const { pathname } = useRouter()
+	const { pathname } = useRouter();
 
 	return (
 		<SideMenuWrapper open={open}>

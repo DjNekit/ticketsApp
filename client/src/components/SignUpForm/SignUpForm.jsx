@@ -17,12 +17,12 @@ export const SignUpForm = props => {
 			<Formik
 				validationSchema={schema}
 				onSubmit={async ({ email, password, confirmPassword }) => {
-                    const { data } = await axios.post('/api/users/signup', {
-                        email,
-                        password
-                    })
-                    console.log(data)
-                }}
+					const { data } = await axios.post('/api/users/signup', {
+						email,
+						password,
+					});
+					console.log(data);
+				}}
 				initialValues={{
 					email: '',
 					password: '',
@@ -31,22 +31,22 @@ export const SignUpForm = props => {
 			>
 				{({ handleSubmit, handleChange, values, errors }) =>
 					<Form noValidate onSubmit={handleSubmit}>
-                        <h1>Регистрация</h1>
+						<h1>Регистрация</h1>
 						<Form.Group md="4" controlId="email" className="mt-3">
 							<Form.Label>Введите Email</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="Email"
-									aria-describedby="inputGroupPrepend"
-									name="email"
-									value={values.email}
-									onChange={handleChange}
-									isInvalid={!!errors.email}
-                                    autoComplete='true'
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.email}
-								</Form.Control.Feedback>
+							<Form.Control
+								type="text"
+								placeholder="Email"
+								aria-describedby="inputGroupPrepend"
+								name="email"
+								value={values.email}
+								onChange={handleChange}
+								isInvalid={!!errors.email}
+								autoComplete="true"
+							/>
+							<Form.Control.Feedback type="invalid">
+								{errors.email}
+							</Form.Control.Feedback>
 						</Form.Group>
 
 						<Form.Group md="3" controlId="password" className="mt-3">
@@ -58,7 +58,7 @@ export const SignUpForm = props => {
 								value={values.password}
 								onChange={handleChange}
 								isInvalid={!!errors.password}
-                                autoComplete='true'
+								autoComplete="true"
 							/>
 							<Form.Control.Feedback type="invalid">
 								{errors.password}
@@ -73,16 +73,19 @@ export const SignUpForm = props => {
 								value={values.confirmPassword}
 								onChange={handleChange}
 								isInvalid={!!errors.confirmPassword}
-                                autoComplete='true'
+								autoComplete="true"
 							/>
 
 							<Form.Control.Feedback type="invalid">
 								{errors.confirmPassword}
 							</Form.Control.Feedback>
 						</Form.Group>
-						
-						<Button type="submit" className="mt-3">Зарегистрироваться</Button>
-					</Form>}
+
+						<Button type="submit" className="mt-3">
+							Зарегистрироваться
+						</Button>
+					</Form>
+				}
 			</Formik>
 			{/* <Form onSubmit={handleSubmit}>
 				<h1>Регистрация</h1>
