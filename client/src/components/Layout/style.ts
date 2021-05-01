@@ -5,4 +5,5 @@ export const Wrapper = styled.div`
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	grid-gap: 2rem;
+	overflow-x: hidden;
 `;

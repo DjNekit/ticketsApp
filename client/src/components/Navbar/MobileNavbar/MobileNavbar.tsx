@@ -3,10 +3,10 @@ import { Navbar, Nav } from 'react-bootstrap-v5';
 import { MenuIcon } from './MenuIcon';
 import { SideMenu } from './SideMenu';
 
-export const MobileNavbar = props => {
+export const MobileNavbar = () => {
 	const [open, setOpen] = useState(false);
 
-	const handleChange = useCallback(() => setOpen(prev => !prev));
+	const handleChange = useCallback(() => setOpen(prev => !prev), []);
 
 	return (
 		<Navbar className="px-3 d-flex justify-content-between desktop-hide" bg="dark" variant="dark" sticky="top">

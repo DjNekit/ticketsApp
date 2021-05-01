@@ -1,6 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
-export const SideMenuWrapper = styled.div`
+type OpenClose = {
+	open: boolean
+}
+export const SideMenuWrapper = styled.div<OpenClose>`
 	display: flex;
 	visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 	justify-content: flex-end;
@@ -34,7 +37,7 @@ const slideIn = keyframes`
   }
 `;
 
-export const Menu = styled.div`
+export const Menu = styled.div<OpenClose>`
 	background-color: white;
 	height: 100%;
 	animation: ${({ open }) => (open ? slideOut : slideIn)} .5s ease forwards;

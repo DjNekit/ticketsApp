@@ -1,7 +1,7 @@
 import { DesktopNavbar } from './DesktopNavbar'
 import { MobileNavbar } from './MobileNavbar'
 
-export const Navbar = props => {
+export const Navbar = () => {
 	return (
     <>
       <DesktopNavbar />
