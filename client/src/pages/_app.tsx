@@ -1,7 +1,9 @@
-import { Layout } from '../components/Layout';
-import NextNprogress from 'nextjs-progressbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux'
+import NextNprogress from 'nextjs-progressbar'
+import { useStore } from '@/redux/store'
+import { Layout } from '@/components/Layout'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -23,20 +25,24 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const MyApp = ({ Component, pageProps }) => {
+  const store = useStore(pageProps.initialReduxState)
+
 	return (
-		<Layout>
-			<GlobalStyle />
-			<Component {...pageProps} />
-      <NextNprogress
-        color="#29D"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={3}
-        options={{
-          showSpinner: false
-        }}
-      />
-		</Layout>
+    <Provider store={store}>
+      <Layout>
+        <GlobalStyle />
+        <Component {...pageProps} />
+        <NextNprogress
+          color="#29D"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={3}
+          options={{
+            showSpinner: false
+          }}
+        />
+      </Layout>
+    </Provider>
 	);
 };
 

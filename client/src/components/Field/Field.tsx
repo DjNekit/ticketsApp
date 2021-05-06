@@ -1,14 +1,15 @@
 import React from 'react';
 import { Form } from 'react-bootstrap-v5';
-import { Field as FormikField, ErrorMessage } from 'formik';
+import { Field as FormikField } from 'formik';
 
 type Props = {
 	name: string,
 	type: string,
 	header?: string,
 	placeholder?: string
+	error?: string
 }
-export const Field: React.FC<Props> = ({ name, type, header, placeholder = '' }) => {
+export const Field = ({ name, type, header, placeholder = '', error }: Props) => {
 	return (
 		<FormikField name={name}>
 			{({ field, meta }) =>
@@ -22,7 +23,7 @@ export const Field: React.FC<Props> = ({ name, type, header, placeholder = '' })
 						autoComplete='true'
 					/>
 					<Form.Control.Feedback type="invalid">
-						<ErrorMessage name={name} />
+						{meta.touched && meta.error}
   				</Form.Control.Feedback>
 				</div>}
 		</FormikField>

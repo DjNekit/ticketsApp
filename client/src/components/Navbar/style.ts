@@ -15,7 +15,7 @@ export const SideMenuWrapper = styled.div<OpenClose>`
 	background-color: rgba(0, 0, 0, .5);
 	overflow: hidden;
 	transition: visibility;
-	transition-delay: ${({ open }) => (open ? '' : '.5s')};
+	transition-delay: ${({ open }) => (open ? '' : '.3s')};
 `;
 
 const slideOut = keyframes`
@@ -40,5 +40,5 @@ const slideIn = keyframes`
 export const Menu = styled.div<OpenClose>`
 	background-color: white;
 	height: 100%;
-	animation: ${({ open }) => (open ? slideOut : slideIn)} .5s ease forwards;
+	animation: ${({ open }) => (open ? slideOut : slideIn)} .3s ease forwards;
 `;

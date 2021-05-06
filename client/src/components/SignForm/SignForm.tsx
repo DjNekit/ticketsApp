@@ -1,6 +1,6 @@
-import { Button } from 'react-bootstrap-v5';
-
+import axios from 'axios'
 import { Formik } from 'formik'
+import { Button } from 'react-bootstrap-v5';
 import { Field } from '../Field'
 import { Wrapper, Form } from './style';
 
@@ -22,7 +22,7 @@ interface SignValues {
 	confirmPassword?: string
 }
 
-export const SignForm = ({ variant }) => {
+export const SignForm = ({ variant }: Props) => {
 	const initialValues: SignValues = {
 		email: '',
 		password: ''
@@ -30,26 +30,40 @@ export const SignForm = ({ variant }) => {
 
 	if (variant === 'up') initialValues.confirmPassword = ''
 
+	const signUpHandle = async (values, actions) => {
+		const { email, password, confirmPassword } = values
+		if (password !== confirmPassword) {
+			return actions.setErrors({ confirmPassword: 'Пароли не совпадают' })
+		}
+
+		const { data } = await axios.post('/api/users/signup', {
+			email,
+			password
+		})
+	}
+
 	return (
 		<Wrapper>
 			<Formik
 				validationSchema={schema}
 				initialValues={initialValues}
-				onSubmit={() => {
-					console.log('submit!')
-				}}
+				onSubmit={signUpHandle}
 			>
-				<Form>
-					<h1>{variant === 'in' ? 'Войти в учетную запись' : 'Регистрация'}</h1>
+				{({ values }) => (
+					<Form>
+						<h1>{variant === 'in' ? 'Войти в учетную запись' : 'Регистрация'}</h1>
 
-					<Field name='email' type='email' header='Email' />
-					<Field name='password' type='password' header='Пароль' />
-					{variant === 'up' && <Field name='confirmPassword' type='password' header='Повторите пароль' />}
+						<Field name='email' type='email' header='Email' />
+						<Field name='password' type='password' header='Пароль' />
+						{variant === 'up' && 
+							<Field name='confirmPassword' type='password' header='Повторите пароль' error={values.password !== values.confirmPassword ? 'Пароли не совпадают' : ''}/>
+						}
 
-					<Button variant="primary" type="submit" className="mt-3">
-						{variant === 'in' ? 'Войти' : 'Зарегистрироваться'}
-					</Button>
-				</Form>
+						<Button variant="primary" type="submit" className="mt-3">
+							{variant === 'in' ? 'Войти' : 'Зарегистрироваться'}
+						</Button>
+					</Form>
+				)}
 			</Formik>
 		</Wrapper>
 	);
