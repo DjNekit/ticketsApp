@@ -18,7 +18,6 @@ export const useRequest = () => {
       return data
 
     } catch (e) {
-      console.log(e)
       e.response.data.errors.map(err => showPopover(err))
     }
   }

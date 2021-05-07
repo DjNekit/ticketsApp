@@ -1,11 +1,12 @@
+import axios from 'axios'
+import { Layout } from '@/components/Layout'
 import { SignUpForm } from '@/components/SignUpForm'
 
-const SignUp = () => {
+export default function SignUp() {
 	return (
-    <>
+    <Layout>
       <SignUpForm />
-    </>
-	);
-};
+    </Layout>
+	)
+}
 
-export default SignUp

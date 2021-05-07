@@ -3,11 +3,15 @@ import { Navbar } from '../Navbar';
 import { Footer } from '../Footer';
 import { Wrapper } from './style';
 
-export const Layout = ({ children }) => {
+type Props = {
+	isAuth?: boolean
+	children: React.ReactNode
+}
+export const Layout = ({ isAuth = false, children }: Props) => {
 	return (
 		<Wrapper>
 			<GlobalPopover />
-			<Navbar />
+			<Navbar isAuth={isAuth}/>
 			{children}
 			<Footer />
 		</Wrapper>

@@ -1,10 +1,10 @@
 import { DesktopNavbar } from './DesktopNavbar'
 import { MobileNavbar } from './MobileNavbar'
 
-export const Navbar = () => {
+export const Navbar = ({ isAuth }) => {
 	return (
     <>
-      <DesktopNavbar />
+      <DesktopNavbar isAuth={isAuth}/>
       <MobileNavbar />
     </>
 	)

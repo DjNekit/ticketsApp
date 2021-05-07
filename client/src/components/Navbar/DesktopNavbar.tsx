@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Navbar, Nav } from 'react-bootstrap-v5'
 
-export const DesktopNavbar = () => {
+export const DesktopNavbar = ({ isAuth }) => {
 	const { pathname } = useRouter()
 
 	return (
@@ -13,12 +13,19 @@ export const DesktopNavbar = () => {
 				<Link href="/">
 					<Nav.Link as='div' className='pointer' active={pathname === '/'}>Главная</Nav.Link>
 				</Link>
-				<Link href="/auth/signin">
-					<Nav.Link as='div' className='pointer'active={pathname === '/auth/signin'}>Войти</Nav.Link>
-				</Link>
-				<Link href="/auth/signup">
-					<Nav.Link as='div' className='pointer' active={pathname === '/auth/signup'}>Регистрация</Nav.Link>
-				</Link>
+				{isAuth 
+					? 
+							<Nav.Link as='div' className='pointer' >Выйти</Nav.Link>
+					:
+						<>
+							<Link href="/auth/signin">
+								<Nav.Link as='div' className='pointer'active={pathname === '/auth/signin'}>Войти</Nav.Link>
+							</Link>
+							<Link href="/auth/signup">
+								<Nav.Link as='div' className='pointer' active={pathname === '/auth/signup'}>Регистрация</Nav.Link>
+							</Link>
+						</>
+				}
 			</Nav>
 		</Navbar>
 	);

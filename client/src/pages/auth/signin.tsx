@@ -1,11 +1,10 @@
+import { Layout } from '@/components/Layout'
 import { SignInForm } from '@/components/SignInForm'
 
-const SignIn = () => {
+export default function SignIn() {
   return (
-    <>
+    <Layout>
       <SignInForm />
-    </>
+    </Layout>
   )
 }
-
-export default SignIn

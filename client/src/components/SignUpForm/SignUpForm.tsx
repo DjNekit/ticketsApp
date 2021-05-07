@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import { Formik } from 'formik'
 import { Button } from 'react-bootstrap-v5';
 import { useRequest } from '@/hooks/useRequest'
@@ -30,7 +31,9 @@ export const SignUpForm = () => {
 			}
 		})
 
-		console.log(data)
+		if (data?.message) {
+			Router.push('/')
+		}
 	}
 
 	return (

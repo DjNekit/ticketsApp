@@ -1,4 +1,4 @@
-import axios from 'axios'
+import Router from 'next/router'
 import { Formik } from 'formik'
 import { Button } from 'react-bootstrap-v5';
 import { useRequest } from '@/hooks/useRequest'
@@ -17,7 +17,6 @@ export const SignInForm = () => {
 	const { doRequest } = useRequest()
 
 	const signInHandle = async (values) => {
-		console.log(1)
 		const { email, password } = values
 
 		const data = await doRequest({ 
@@ -28,7 +27,9 @@ export const SignInForm = () => {
 			}
 		})
 
-		console.log(data)
+		if (data?.message) {
+			Router.push('/')
+		}
 	}
 
 	return (
