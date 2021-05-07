@@ -3,22 +3,23 @@ import { usePopover } from './usePopover'
 
 interface UseRequest {
   url: string
-  method?: 'get' | 'post',
   body?: any,
+  method?: string
 }
-
-type ErrorsType = null | Array<{ message: string }>
 
 export const useRequest = () => {
   const { showPopover } = usePopover()
 
-  const doRequest = async ({ url, method = 'get', body = {} }: UseRequest) => {
+  const doRequest = async ({ url, body, method }: UseRequest) => {
+    const chooseMethod = method || (body ? 'post' : 'get')
+    
     try {
-      const { data } = await axios[method](url, body)
+      const { data } = await axios[chooseMethod](url, body)
       return data
 
     } catch (e) {
-      showPopover(e.response.data.errors)
+      console.log(e)
+      e.response.data.errors.map(err => showPopover(err))
     }
   }
 

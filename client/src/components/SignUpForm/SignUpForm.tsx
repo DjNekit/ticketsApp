@@ -1,6 +1,7 @@
-import axios from 'axios'
 import { Formik } from 'formik'
 import { Button } from 'react-bootstrap-v5';
+import { useRequest } from '@/hooks/useRequest'
+
 import { Field } from '../Field'
 import { Wrapper, Form } from './style';
 
@@ -12,23 +13,8 @@ const schema = yup.object().shape({
 	confirmPassword: yup.string().min(6, 'Пароль должен содержать не менее 6 символов').required('Это обязательное поле'),
 })
 
-type Props = {
-	variant: 'up' | 'in'
-}
-
-interface SignValues {
-	email: string
-	password: string
-	confirmPassword?: string
-}
-
-export const SignForm = ({ variant }: Props) => {
-	const initialValues: SignValues = {
-		email: '',
-		password: ''
-	}
-
-	if (variant === 'up') initialValues.confirmPassword = ''
+export const SignUpForm = () => {
+	const { doRequest } = useRequest()
 
 	const signUpHandle = async (values, actions) => {
 		const { email, password, confirmPassword } = values
@@ -36,32 +22,40 @@ export const SignForm = ({ variant }: Props) => {
 			return actions.setErrors({ confirmPassword: 'Пароли не совпадают' })
 		}
 
-		const { data } = await axios.post('/api/users/signup', {
-			email,
-			password
+		const data = await doRequest({
+			url: '/api/users/signup',
+			body: {
+				email,
+				password
+			}
 		})
+
+		console.log(data)
 	}
 
 	return (
 		<Wrapper>
 			<Formik
 				validationSchema={schema}
-				initialValues={initialValues}
+				initialValues={{
+					email: '',
+					password: '',
+					confirmPassword: ''
+				}}
 				onSubmit={signUpHandle}
 			>
 				{({ values }) => (
 					<Form>
-						<h1>{variant === 'in' ? 'Войти в учетную запись' : 'Регистрация'}</h1>
-
+						<h1>Регистрация</h1>
 						<Field name='email' type='email' header='Email' />
 						<Field name='password' type='password' header='Пароль' />
-						{variant === 'up' && 
-							<Field name='confirmPassword' type='password' header='Повторите пароль' error={values.password !== values.confirmPassword ? 'Пароли не совпадают' : ''}/>
-						}
-
-						<Button variant="primary" type="submit" className="mt-3">
-							{variant === 'in' ? 'Войти' : 'Зарегистрироваться'}
-						</Button>
+						<Field 
+							name='confirmPassword' 
+							type='password' 
+							header='Повторите пароль' 
+							error={values.password !== values.confirmPassword ? 'Пароли не совпадают' : ''} 
+						/>
+						<Button variant="primary" type="submit" className="mt-3">Зарегистрироваться</Button>
 					</Form>
 				)}
 			</Formik>
