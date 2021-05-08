@@ -1,46 +1,42 @@
+import App from "next/app"
 import { Provider } from 'react-redux'
-import NextNprogress from 'nextjs-progressbar'
+
+import { buildClient } from '@/api/build-client'
 import { useStore } from '@/redux/store'
+import { NextProgress } from '@/components/NextProgress'
+import { Layout } from '@/components/Layout'
+import { GlobalStyle } from '@/globalStyle'
+import { IUser } from '@/types'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-  .pointer {
-    cursor: pointer;
-  }
-
-  .desktop-hide {
-    @media (min-width: 577px) {
-      display: none!important;
-    }
-  }
-
-  .mobile-hide {
-    @media (max-width: 576px) {
-      display: none!important;
-    }
-  }
-`;
-
-const MyApp = ({ Component, pageProps }) => {
+export default function AppComponent({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
+
+  const { user } = pageProps
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
-      <NextNprogress
-        color="#29D"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={3}
-        options={{
-          showSpinner: false
-        }}
-      />
+      <NextProgress />
+  		<Layout isAuth={!!user}>
+        <Component {...pageProps} />
+      </Layout>
       <GlobalStyle />
     </Provider>
   );
-};
+}
 
-export default MyApp;
+AppComponent.getInitialProps = async context => {
+  const { pageProps } = await App.getInitialProps(context)
+
+  // Получение текущего зарегистрированного пользователя или его отсутствия
+  const client = buildClient(context.ctx)
+  const { data } = await client.get<IUser>('/api/users/currentuser')
+
+  return {
+    pageProps: {
+      ...pageProps,
+      ...data
+    }
+  }
+}

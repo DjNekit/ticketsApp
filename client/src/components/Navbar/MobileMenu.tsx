@@ -24,23 +24,23 @@ export const MobileMenu: React.FC<IMenu> = ({ isAuth, pathname, onSignout }) => 
 					<ListGroup>
 						<ListGroup.Item active={pathname === '/'}>
 							<Link href="/">
-								<NavLink as="div">Home</NavLink>
+								<NavLink as="div">Главная</NavLink>
 							</Link>
 						</ListGroup.Item>
 						{isAuth
 							? <ListGroup.Item>
-										<NavLink as="div" onClick={onSignout}>SignOut</NavLink>
+										<NavLink as="div" onClick={onSignout}>Выйти</NavLink>
 								</ListGroup.Item>
 							:
 								<>
 									<ListGroup.Item active={pathname === '/auth/signin'}>
 										<Link href="/auth/signin">
-											<NavLink as="div">SignIn</NavLink>
+											<NavLink as="div">Войти</NavLink>
 										</Link>
 									</ListGroup.Item>
 									<ListGroup.Item active={pathname === '/auth/signup'}>
 										<Link href="/auth/signup">
-											<NavLink as="div">SignOut</NavLink>
+											<NavLink as="div">Регистрация</NavLink>
 										</Link>
 									</ListGroup.Item>
 								</>
