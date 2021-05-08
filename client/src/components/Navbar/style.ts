@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components'
+import { Nav } from 'react-bootstrap-v5'
 
 type OpenClose = {
 	open: boolean
@@ -41,4 +42,10 @@ export const Menu = styled.div<OpenClose>`
 	background-color: white;
 	height: 100%;
 	animation: ${({ open }) => (open ? slideOut : slideIn)} .3s ease forwards;
-`;
+`
+
+export const NavLink = styled(Nav.Link)`
+	.active>& {
+		color: white;
+	}
+`

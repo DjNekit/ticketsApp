@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout'
-import { SignInForm } from '@/components/SignInForm'
+import { SignInForm } from '@/components/SignForm'
 
 export default function SignIn() {
   return (

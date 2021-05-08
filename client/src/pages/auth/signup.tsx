@@ -1,6 +1,5 @@
-import axios from 'axios'
 import { Layout } from '@/components/Layout'
-import { SignUpForm } from '@/components/SignUpForm'
+import { SignUpForm } from '@/components/SignForm'
 
 export default function SignUp() {
 	return (

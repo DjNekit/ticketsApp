@@ -3,7 +3,7 @@ import { Form as F } from 'formik';
 
 export const Wrapper = styled.div`
 	display: grid;
-	grid-template-columns: minmax(300px, 528px);
+	grid-template-columns: minmax(288px, 528px);
 	align-items: center;
 	justify-content: center;
 	padding: 0 1rem;

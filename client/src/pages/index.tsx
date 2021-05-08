@@ -1,7 +1,8 @@
-import axios from 'axios'
+import buildClient from '@/api/build-client'
+import { GetServerSideProps } from 'next'
 import { Layout } from '@/components/Layout'
-
 import { usePopover } from '@/hooks/usePopover'
+import { IUser } from '@/types'
 
 export default function HomePage({ user }) {
 	const { showPopover, hidePopover } = usePopover()
@@ -22,25 +23,11 @@ export default function HomePage({ user }) {
 	)
 }
 
-export const getServerSideProps = async ({ req }) => {
-	let user = null
-	try {
-		const { data } = await axios.get(`http://tickets.dev/api/users/currentuser`, {
-			headers: req.headers
-		})
-		user = data.user
-		return {
-			props: {
-				user: data.user
-			}
-		}
-	} catch (e) {
-		return {
-			props: {
-				user: null
-			}
-		}
-	}
+export const getServerSideProps: GetServerSideProps = async ctx => {
+	const client = buildClient(ctx)
+	const { data } = await client.get<IUser>('/api/users/currentuser')
 
-	
+	return {
+		props: data
+	}
 } 
