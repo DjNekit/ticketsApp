@@ -29,4 +29,13 @@ build:
           - src: 'src/**/*.ts*'
             dest: .
 
+    - image: nikitalipin97/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts*'
+            dest: .
+
 

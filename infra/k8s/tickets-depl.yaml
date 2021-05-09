@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets
+  template:
+    metadata:
+      labels:
+        app: tickets
+    spec:
+      containers:
+      - name: tickets
+        # image: us.gcr.io/ticketapp-308317/auth
+        image: nikitalipin97/tickets
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: JWT
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret
+                key: JWT
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "300m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-srv
+spec:
+  selector:
+    app: tickets
+  ports:
+  - port: 3000
+    targetPort: 3000
