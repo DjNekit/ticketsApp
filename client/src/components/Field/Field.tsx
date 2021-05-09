@@ -1,6 +1,5 @@
-import React from 'react';
-import { Form } from 'react-bootstrap-v5';
-import { Field as FormikField } from 'formik';
+import { Form } from 'react-bootstrap-v5'
+import { Field as FormikField } from 'formik'
 
 type Props = {
 	name: string,
@@ -27,5 +26,5 @@ export const Field = ({ name, type, header, placeholder = '', error }: Props) =>
   				</Form.Control.Feedback>
 				</div>}
 		</FormikField>
-	);
-};
+	)
+}

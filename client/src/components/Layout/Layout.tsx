@@ -1,7 +1,7 @@
-import { GlobalPopover } from '../GlobalPopover';
-import { Navbar } from '../Navbar';
-import { Footer } from '../Footer';
-import { Wrapper } from './style';
+import { GlobalPopover } from '../GlobalPopover'
+import { Navbar } from '../Navbar'
+import { Footer } from '../Footer'
+import { Wrapper } from './style'
 
 type Props = {
 	isAuth?: boolean
@@ -15,5 +15,5 @@ export const Layout = ({ isAuth = false, children }: Props) => {
 			{children}
 			<Footer />
 		</Wrapper>
-	);
-};
+	)
+}

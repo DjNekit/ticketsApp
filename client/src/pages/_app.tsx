@@ -23,7 +23,7 @@ export default function AppComponent({ Component, pageProps }) {
       </Layout>
       <GlobalStyle />
     </Provider>
-  );
+  )
 }
 
 AppComponent.getInitialProps = async context => {

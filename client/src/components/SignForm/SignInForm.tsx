@@ -1,10 +1,10 @@
 import Router from 'next/router'
 import { Formik } from 'formik'
-import { Button } from 'react-bootstrap-v5';
+import { Button } from 'react-bootstrap-v5'
 import { useRequest } from '@/hooks/useRequest'
 
 import { Field } from '../Field'
-import { Wrapper, Form } from './style';
+import { Wrapper, Form } from './style'
 
 import * as yup from 'yup'
 
@@ -52,5 +52,5 @@ export const SignInForm = () => {
 				)}
 			</Formik>
 		</Wrapper>
-	);
-};
+	)
+}

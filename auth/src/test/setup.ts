@@ -16,7 +16,7 @@ beforeAll(async() => {
     process.env.JWT = 'secret'
 
     mongo = new MongoMemoryServer()
-    const uri = await mongo.getUri();
+    const uri = await mongo.getUri()
 
     await mongoose.connect(uri, {
         useCreateIndex: true,
