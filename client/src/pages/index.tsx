@@ -1,4 +1,5 @@
 import { usePopover } from '@/hooks/usePopover'
+import { Button } from 'react-bootstrap-v5'
 
 export default function HomePage({ user }) {
 	const { showPopover, hidePopover } = usePopover()
@@ -9,8 +10,8 @@ export default function HomePage({ user }) {
 		<div className='container'>
 			<h1>Home Page</h1>
 			{user && <h1>Auth!!! Your email is {user.email}</h1>}
-			<button onClick={openPopover}>Show</button>
-			<button onClick={hidePopover}>hide</button>
+			<Button onClick={openPopover}>Show</Button>{' '}
+			<Button onClick={hidePopover}>hide</Button>
 		</div>
 
 	)
