@@ -18,6 +18,8 @@ spec:
         image: nikitalipin97/auth
         imagePullPolicy: IfNotPresent
         env:
+          - name: MONGO_URI
+            value: 'mongodb://auth-mongo-srv:27017/auth'
           - name: JWT
             valueFrom:
               secretKeyRef:
