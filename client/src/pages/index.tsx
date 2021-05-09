@@ -7,9 +7,7 @@ export default function HomePage({ user }) {
 	}
 	return (
 		<div className='container'>
-			<h1>
-				Home Page
-				</h1>
+			<h1>Home Page</h1>
 			{user && <h1>Auth!!! Your email is {user.email}</h1>}
 			<button onClick={openPopover}>Show</button>
 			<button onClick={hidePopover}>hide</button>

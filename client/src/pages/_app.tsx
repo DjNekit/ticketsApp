@@ -10,10 +10,8 @@ import { IUser } from '@/types'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default function AppComponent({ Component, pageProps }) {
+export default function AppComponent({ Component, pageProps, user }) {
   const store = useStore(pageProps.initialReduxState)
-
-  const { user } = pageProps
 
   return (
     <Provider store={store}>
@@ -34,9 +32,7 @@ AppComponent.getInitialProps = async context => {
   const { data } = await client.get<IUser>('/api/users/currentuser')
 
   return {
-    pageProps: {
-      ...pageProps,
-      ...data
-    }
+    pageProps,
+    ...data
   }
 }
