@@ -1,10 +1,7 @@
 import { Router, Request, Response } from 'express'
 import { body } from 'express-validator'
 import jwt from 'jsonwebtoken'
-
-import { validateRequest } from '@nldev/common'
-
-import { BadRequestError } from '@nldev/common'
+import { validateRequest, BadRequestError } from '@nldev/common'
 
 import { User } from '../models/User'
 
