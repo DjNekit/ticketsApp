@@ -19,9 +19,8 @@ router.post(
       .isFloat({ gt: 0 })
       .withMessage('Price must be valid')
   ],
-
   validateRequest, 
-  
+
   createTicketController
 )
 
