@@ -1,20 +1,6 @@
-import { Schema, model, Model, Document } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { PasswordManager } from '../services/passwordManager'
-
-interface UserAttrs {
-    email: string
-    password: string
-}
-
-interface UserDoc extends Document {
-    email: string
-    password: string
-}
-
-interface UserModel extends Model<UserDoc> {
-    build(attrs: UserAttrs): UserDoc
-}
-
+import { UserAttrs, UserDoc, UserModel } from './types'
 
 const userSchema = new Schema({
     email: {
@@ -29,9 +15,9 @@ const userSchema = new Schema({
     toJSON: {
        transform: (doc, ret) => {
            ret.id = ret._id
-           delete ret._id
            delete ret.password
-           delete ret.iat
+           delete ret._id
+           delete ret.__v
        },
        versionKey: false
     } 

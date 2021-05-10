@@ -1,10 +1,8 @@
 import { Router } from 'express'
+import { signUpController } from '../controllers/signupController'
 
 const router = Router()
 
-router.post('/api/users/signout', (req, res) => {
-  req.session = null
-  res.json({})
-})
+router.post('/api/users/signout', signUpController)
 
 export { router as signoutRouter }

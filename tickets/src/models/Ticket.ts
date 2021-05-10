@@ -1,18 +1,5 @@
-import { Schema, model, Document, Model } from 'mongoose'
-
-interface TicketAttrs {
-  title: string
-  price: number
-}
-
-interface TicketDoc extends Document {
-  title: string
-  price: number
-}
-
-interface TicketModel extends Model<TicketDoc> {
-  build(attrs: TicketAttrs): TicketDoc
-}
+import { Schema, model } from 'mongoose'
+import { TicketAttrs, TicketDoc, TicketModel } from './types'
 
 const schema = new Schema({
   title: {
@@ -22,13 +9,17 @@ const schema = new Schema({
   price: {
     type: Number,
     required: true
+  },
+  userId: {
+    type: String,
+    required: true
   }
 }, {
   toJSON: {
     transform: (doc, ret) => {
       ret.id = ret._id
       delete ret._id
-      delete ret.iat
+      delete ret.__v
     },
     versionKey: false
   }

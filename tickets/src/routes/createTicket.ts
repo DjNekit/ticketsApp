@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
 import { requireAuth, validateRequest } from '@nldev/common'
-import { createTicketController } from '../controllers/createTicket'
+import { createTicketController } from '../controllers/createTicketController'
 
 const router = Router()
 

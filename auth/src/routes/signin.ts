@@ -1,11 +1,7 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import { body } from 'express-validator'
-import jwt from 'jsonwebtoken'
-import { validateRequest, BadRequestError } from '@nldev/common'
-
-import { User } from '../models/User'
-import { PasswordManager } from '../services/passwordManager'
-
+import { signinController } from '../controllers/signinController'
+import { validateRequest } from '@nldev/common'
 
 const router = Router()
 
@@ -20,34 +16,7 @@ router.post(
       .notEmpty()
   ],
   validateRequest,
-  async (req: Request, res: Response) => {
-    const { email, password } = req.body
-
-    const existingUser = await User.findOne({ email })
-
-    if (!existingUser) {
-      throw new BadRequestError('Invalide credentials')
-    }
-
-    const passwordsMatch = await PasswordManager.compare(existingUser.password, password)
-
-    if (!passwordsMatch) {
-      throw new BadRequestError('Invalide credentials')
-    }
-
-    const token = jwt.sign({
-      id: existingUser.id,
-      email: existingUser.email
-    }, process.env.JWT!)
-
-    req.session = {
-      jwt: token
-    }
-
-    res.json({
-      message: existingUser
-    })
-  }
+  signinController
 )
 
 export { router as signinRouter }
