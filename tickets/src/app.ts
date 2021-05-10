@@ -1,8 +1,10 @@
 import express from 'express'
 import helmet from 'helmet'
 import cookieSession from 'cookie-session'
-import { errorHandler, NotFoundError } from '@nldev/common'
+import { currentUser, errorHandler, NotFoundError } from '@nldev/common'
 import 'express-async-errors'
+
+import { createticketRouter } from './routes/createTicket'
 
 const app = express()
 
@@ -15,9 +17,11 @@ app.use(cookieSession({
     signed: false,
     secure: process.env.NODE_ENV !== 'test'
 }))
+app.use(currentUser)
 
 // == Routes =================
 
+app.use(createticketRouter)
 
 app.all('/*', async () => {
     throw new NotFoundError()

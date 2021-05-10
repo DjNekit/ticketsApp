@@ -1,12 +1,13 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
 import { app } from '../app'
 import request from 'supertest'
 
 declare global {
     namespace NodeJS {
         interface Global {
-            signin(): Promise<string[]>
+            signin(): string[]
         }
     }
 }
@@ -39,16 +40,17 @@ afterAll(async () => {
     await mongoose.connection.close()
 })
 
-global.signin = async () => {
-    const email = 'test@test.com'
-    const password = '123456'
+// Create fake auth function for test environment
+global.signin = () => {
+    const payload = {
+        id: '123mnk123n',
+        email: 'test@test.ru'
+    }
+    const token = jwt.sign(payload, process.env.JWT!)
 
-    const res = await request(app)
-        .post('/api/users/signup')
-        .send({ email, password })
-        .expect(201)
+    const session = { jwt: token }
+    const sessionJSON = JSON.stringify(session)
+    const base64 = Buffer.from(sessionJSON).toString('base64')
 
-    const cookie = res.get('Set-Cookie')
-
-    return cookie   
+    return [`express:sess=${base64}`]
 }
