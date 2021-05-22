@@ -15,10 +15,14 @@ export const useRequest = () => {
     
     try {
       const { data } = await axios[chooseMethod](url, body)
+      console.log(data)
+      if (data.errors) {
+        return data.errors.map(err => showPopover(err))
+      }
       return data
 
     } catch (e) {
-      e.response.data.errors.map(err => showPopover(err))
+      showPopover(e)
     }
   }
 
