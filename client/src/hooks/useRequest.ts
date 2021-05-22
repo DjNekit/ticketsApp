@@ -1,16 +1,25 @@
 import axios from 'axios'
+import { useState } from 'react'
 import { usePopover } from './usePopover'
 
 interface UseRequest {
   url: string
   body?: any,
-  method?: string
+  method?: string,
+  err?: string
 }
 
 export const useRequest = () => {
   const { showPopover } = usePopover()
+  const [isLoading, setIsLoading] = useState(false)
 
-  const doRequest = async ({ url, body, method }: UseRequest) => {
+  const doRequest = async ({ 
+    url, 
+    body, 
+    method, 
+    err='Во время запроса произошла ошибка, попробуйте позднее' 
+  }: UseRequest) => {
+    setIsLoading(true)
     const chooseMethod = method || (body ? 'post' : 'get')
     
     try {
@@ -22,10 +31,12 @@ export const useRequest = () => {
       return data
 
     } catch (e) {
-      showPopover(e)
+      showPopover({ message: err })
     }
+    
+    setIsLoading(false)
   }
 
-  return { doRequest }
+  return { doRequest, isLoading }
 
 }

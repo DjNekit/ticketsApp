@@ -24,4 +24,4 @@ router.post(
   createTicketController
 )
 
-export { router as createticketRouter}
+export { router as createTicketRouter}

@@ -4,7 +4,7 @@ import cookieSession from 'cookie-session'
 import { currentUser, errorHandler, NotFoundError } from '@nldev/common'
 import 'express-async-errors'
 
-import { createticketRouter } from './routes/createTicket'
+import { createTicketRouter } from './routes/createTicket'
 
 const app = express()
 
@@ -21,7 +21,7 @@ app.use(currentUser)
 
 // == Routes =================
 
-app.use(createticketRouter)
+app.use(createTicketRouter)
 
 app.all('/*', async () => {
     throw new NotFoundError()
