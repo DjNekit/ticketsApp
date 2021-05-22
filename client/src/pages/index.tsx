@@ -9,10 +9,6 @@ export default function HomePage({ user }) {
 		showPopover({ message: 'Успешно!', variant: 'success' })
 	}
 
-	// setInterval(() => {
-	// 	console.log(isLoading)
-	// }, 3000)
-
 	const click = async () => {
 		const res = await doRequest({
 			url: '/api/tickets',
@@ -21,7 +17,9 @@ export default function HomePage({ user }) {
 				price: 1000
 			}
 		})
-		console.log(res)
+		showPopover({
+			message: res.message.title
+		})
 	}
 	return (
 		<div className='container'>

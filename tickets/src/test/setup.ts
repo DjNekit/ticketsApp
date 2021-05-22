@@ -1,13 +1,12 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
-import { app } from '../app'
-import request from 'supertest'
 
 declare global {
     namespace NodeJS {
         interface Global {
             signin(): string[]
+            id(): string
         }
     }
 }
@@ -53,4 +52,8 @@ global.signin = () => {
     const base64 = Buffer.from(sessionJSON).toString('base64')
 
     return [`express:sess=${base64}`]
+}
+
+global.id = () => {
+    return mongoose.Types.ObjectId().toHexString()
 }
