@@ -24,7 +24,6 @@ export const useRequest = () => {
     
     try {
       const { data } = await axios[chooseMethod](url, body)
-      console.log(data)
       if (data.errors) {
         return data.errors.map(err => showPopover(err))
       }
@@ -32,9 +31,10 @@ export const useRequest = () => {
 
     } catch (e) {
       showPopover({ message: err })
+    } finally {
+      setIsLoading(false)
     }
-    
-    setIsLoading(false)
+
   }
 
   return { doRequest, isLoading }
