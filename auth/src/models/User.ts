@@ -22,20 +22,21 @@ const userSchema = new Schema({
        versionKey: false
     } 
 })
-const User = model<UserDoc, UserModel>('User', userSchema)
 
 userSchema.pre('save', async function(done) {
     if (this.isModified('password')) {
         const hashed = await PasswordManager.toHash(this.get('password'))
         this.set('password', hashed)
     } 
-
+    
     done()
 })
 
 userSchema.statics.build = (attrs: UserAttrs) => {
     return new User(attrs)
 }
+
+const User = model<UserDoc, UserModel>('User', userSchema)
 
 export { User }
 
