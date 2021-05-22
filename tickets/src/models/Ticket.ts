@@ -25,10 +25,10 @@ const schema = new Schema({
   }
 })
 
-const Ticket = model<TicketDoc, TicketModel>('Ticket', schema)
 
 schema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs)
 }
+const Ticket = model<TicketDoc, TicketModel>('Ticket', schema)
 
 export { Ticket }
