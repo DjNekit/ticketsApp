@@ -5,11 +5,7 @@ it('Getting all tickets', async () => {
   const title = 'sdfsdfsdf0'
   const price = 1000
 
-  await request(app)
-    .post('/api/tickets')
-    .set('Cookie', global.signin())
-    .send({ title, price })
-    .expect(201)
+  await global.createTicket(title, price)
 
   const res = await request(app)
     .get('/api/tickets')

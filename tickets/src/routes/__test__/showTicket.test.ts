@@ -14,11 +14,7 @@ describe('Tickets manipulation', () => {
     const title = 'sdfsdfsdf'
     const price = 1000
   
-    const createTicketRes = await request(app)
-      .post('/api/tickets')
-      .set('Cookie', global.signin())
-      .send({ title, price})
-      .expect(201)
+    const createTicketRes = await global.createTicket(title, price)
   
     const id = createTicketRes.body.message.id
   

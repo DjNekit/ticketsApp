@@ -1,12 +1,16 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
+import { Response } from 'express'
 import jwt from 'jsonwebtoken'
+import request from 'supertest'
+import { app } from '../app'
 
 declare global {
   namespace NodeJS {
     interface Global {
       signin(): string[]
       id(): string
+      createTicket(title: string, price: number, cookie?: string[]): Promise<any> 
     }
   }
 }
@@ -39,10 +43,14 @@ afterAll(async () => {
   await mongoose.connection.close()
 })
 
+global.id = () => {
+  return mongoose.Types.ObjectId().toHexString()
+}
+
 // Create fake auth function for test environment
 global.signin = () => {
   const payload = {
-    id: '123mnk123n',
+    id: global.id(),
     email: 'test@test.ru'
   }
   const token = jwt.sign(payload, process.env.JWT!)
@@ -54,6 +62,11 @@ global.signin = () => {
   return [`express:sess=${base64}`]
 }
 
-global.id = () => {
-  return mongoose.Types.ObjectId().toHexString()
+global.createTicket = async (title, price, cookie) => {
+  const res = await request(app)
+    .post('/api/tickets')
+    .set('Cookie', cookie || global.signin())
+    .send({ title, price })
+
+  return res
 }

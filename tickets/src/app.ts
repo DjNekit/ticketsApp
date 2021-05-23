@@ -5,6 +5,7 @@ import { currentUser, errorHandler, NotFoundError } from '@nldev/common'
 import 'express-async-errors'
 
 import { createTicketRouter } from './routes/createTicket'
+import { updateTicketRouter } from './routes/updateTicket'
 import { showTicketRouter } from './routes/showTicket'
 import { getTicketsRouter } from './routes/getTickets'
 
@@ -23,6 +24,7 @@ app.use(currentUser)
 
 // == Routes =================
 app.use(createTicketRouter)
+app.use(updateTicketRouter)
 app.use(showTicketRouter)
 app.use(getTicketsRouter)
 
