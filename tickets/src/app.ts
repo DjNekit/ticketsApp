@@ -16,8 +16,8 @@ app.set('trust proxy', true)
 app.use(helmet())
 app.use(express.json())
 app.use(cookieSession({
-    signed: false,
-    secure: process.env.NODE_ENV !== 'test'
+  signed: false,
+  secure: process.env.NODE_ENV !== 'test'
 }))
 app.use(currentUser)
 
@@ -27,7 +27,7 @@ app.use(showTicketRouter)
 app.use(getTicketsRouter)
 
 app.all('/*', async () => {
-    throw new NotFoundError()
+  throw new NotFoundError()
 })
 
 app.use(errorHandler)
